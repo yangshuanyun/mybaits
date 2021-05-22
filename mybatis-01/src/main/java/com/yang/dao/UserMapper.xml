@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.dao.UserMapper">
+    <insert id="addUser" parameterType="com.yang.pojo.User">
+        insert  into  cmdbv1.user(id,account,pwd) values (#{id},#{account},#{pwd});
+    </insert>
+    <select id="getUserList" resultType="com.yang.pojo.User">
+        select  * from  cmdbv1.user ;
+    </select>
+    <update id="updateUser" parameterType="com.yang.pojo.User">
+        update cmdbv1.user set account= #{account},pwd=#{pwd} where id=#{id};
+    </update>
+    <delete id="deleteUser" parameterType="String">
+        delete  from cmdbv1.user where id=#{Strng};
+    </delete>
+</mapper>

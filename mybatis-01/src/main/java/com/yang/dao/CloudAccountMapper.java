@@ -1,6 +1,7 @@
 package com.yang.dao;
 
 import com.yang.pojo.CloudAccount;
+import com.yang.pojo.User;
 
 import java.util.List;
 
@@ -13,5 +14,7 @@ public interface CloudAccountMapper {
     List<CloudAccount> getCloudAccountList();
 
     CloudAccount getCloudAccount(String id);
+
+    int addCloudAccount();
 
 }

@@ -1,11 +1,16 @@
 package com.yang.dao;
 
 import com.yang.pojo.CloudAccount;
+import com.yang.pojo.User;
 import com.yang.utils.MybaitsUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import java.beans.Transient;
+import java.lang.reflect.MalformedParameterizedTypeException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author Ys
@@ -14,6 +19,9 @@ import java.util.List;
  */
 public class CloudAccountTest {
 
+    /**
+     * 查询所有数据
+     */
     @Test
     public  void  test(){
         //获取sqlssssion对象
@@ -24,13 +32,14 @@ public class CloudAccountTest {
         List<CloudAccount> list =  cloudAccountMapper.getCloudAccountList();
         for (CloudAccount cloudAccount : list) {
             System.out.println(cloudAccount);
-
         }
         sqlSession.close();
 
     }
 
-
+    /**
+     * 根据id查数据
+     */
     @Test
     public  void  test1(){
         SqlSession sqlSession =  MybaitsUtils.getSqlSession();
@@ -40,4 +49,65 @@ public class CloudAccountTest {
 
         sqlSession.close();
     }
+
+
+    /**
+     * 查询数据
+     */
+    @Test
+    public  void  test2(){
+        SqlSession sqlSession = MybaitsUtils.getSqlSession();
+        UserMapper  userMapper = sqlSession.getMapper(UserMapper.class);
+        // userMapper.addUser(new User("1","ys","sss"));
+        List<User> list=  userMapper.getUserList();
+        for (User user : list) {
+            System.out.println(user);
+        }
+        sqlSession.close();
+    }
+
+    //插入数据
+    @Test
+    public  void  test3(){
+        SqlSession sqlSession = MybaitsUtils.getSqlSession();
+        UserMapper  userMapper = sqlSession.getMapper(UserMapper.class);
+        userMapper.addUser(new User("11","ys","sss"));
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    //更新数据
+    @Test
+    public  void  test4(){
+        SqlSession sqlSession = MybaitsUtils.getSqlSession();
+        UserMapper  userMapper = sqlSession.getMapper(UserMapper.class);
+        userMapper.updateUser(new User("11","yangs","ssqqqws"));
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    //删除数据
+    @Test
+    public  void  test5(){
+        SqlSession sqlSession = MybaitsUtils.getSqlSession();
+        UserMapper  userMapper = sqlSession.getMapper(UserMapper.class);
+        userMapper.deleteUser("11");
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+
+    //MAP插入数据
+    @Test
+    public  void  test6(){
+        SqlSession sqlSession = MybaitsUtils.getSqlSession();
+        UserMapper  userMapper = sqlSession.getMapper(UserMapper.class);
+        Map<String,Object> map = new HashMap<String, Object>();
+
+        userMapper.deleteUser("11");
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+
 }
